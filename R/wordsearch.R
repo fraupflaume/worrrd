@@ -261,7 +261,7 @@ plot.wordsearch <- function(x,
   # TODO: add a background image
 
   # draw word list; merge with puzzle
-  if (all(!is.na(clues))) {      # if clues = NA, don't draw word list
+  if (all(!is.na(x$clues))) {      # if clues = NA, don't draw word list
     if (clues) {
       tmp <- dplyr::tibble(
         i = 1,
