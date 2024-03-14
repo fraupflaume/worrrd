@@ -36,7 +36,8 @@
 #' wds <- c("πάω", "πας", "πάει", "πάμε", "πάτε", "πάνε")
 #' clu <- c("I go", "you go", "she goes", "we go", "you all go", "they go")
 #' flrs <- unlist(strsplit(c(ΑΆΒΓΔΕΈΖΗΘΙΊΚΛΜΝΞΟΌΠΡΣΤΥΎΦΧΨΩΏΪ)) # split into vector individual letters
-#' plot(wordsearch(words = wds, clues = clu, ltrs = flrs), title = "Random Greek Words")
+#' ex4 <- wordsearch(words = wds, clues = clu, ltrs = flrs)
+#' plot(ex4, title = "Random Greek Words")
 #'
 #' @return wordsearch object
 #' @export
