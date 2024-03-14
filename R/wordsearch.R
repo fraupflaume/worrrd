@@ -1,6 +1,7 @@
 #' Create a wordsearch puzzle
 #' @param words a vector of hidden words (character/vector)
 #' @param clues a vector of word clues (optional; character/vector)
+#' @param ltrs a vector of custom filler letters (optional; character/vector)
 #' @param r number of rows
 #' @param c number of columns
 #' @param image path to an image that the resulting grid should look like.NULL for no shape
@@ -34,6 +35,7 @@
 #' @export
 wordsearch <- function(words = c("finding", "needles", "inside", "haystacks"),
                        clues = words,
+                       ltrs = LETTERS,
                        r = 10,
                        c = 10,
                        image = NULL) {
@@ -82,9 +84,10 @@ wordsearch <- function(words = c("finding", "needles", "inside", "haystacks"),
 
   # fill remaining matrix with random letters
   ids <- is.na(x)
+  ltrs <- toupper(ltrs)                              #<- capitalize custom filler letters **
   if (!is.null(image))
     ids <- ids & shape_matrix
-  x[ids] <- sample(LETTERS, sum(ids), replace = TRUE)
+  x[ids] <- sample(ltrs, sum(ids), replace = TRUE)   #<- use custom filler letters **
 
   # convert to a 'wordsearch' class object
   out <-
