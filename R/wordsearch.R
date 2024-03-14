@@ -36,7 +36,7 @@
 #' wds <- c("πάω", "πας", "πάει", "πάμε", "πάτε", "πάνε")
 #' clu <- c("I go", "you go", "she goes", "we go", "you all go", "they go")
 #' # split into vector of individual letters for custom filler
-#' flrs <- unlist(strsplit(c(ΑΆΒΓΔΕΈΖΗΘΙΊΚΛΜΝΞΟΌΠΡΣΤΥΎΦΧΨΩΏΪ))
+#' flrs <- unlist(strsplit(c("ΑΆΒΓΔΕΈΖΗΘΙΊΚΛΜΝΞΟΌΠΡΣΤΥΎΦΧΨΩΏΪ"), split = ""))
 #' ex4 <- wordsearch(words = wds, clues = clu, ltrs = flrs)
 #' plot(ex4, title = "Random Greek Words")
 #'
