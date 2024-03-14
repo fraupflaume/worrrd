@@ -31,6 +31,13 @@
 #'  ex3 <- wordsearch(words = math$solution, clues = math$problem)
 #'  plot(ex3, solution = TRUE, title = "Math is Fun")
 #'
+#' # Example 4 ----
+#' # using custom filler letters
+#' wds <- c("πάω", "πας", "πάει", "πάμε", "πάτε", "πάνε")
+#' clu <- c("I go", "you go", "she goes", "we go", "you all go", "they go")
+#' flrs <- unlist(strsplit(c(ΑΆΒΓΔΕΈΖΗΘΙΊΚΛΜΝΞΟΌΠΡΣΤΥΎΦΧΨΩΏΪ)) # split into vector individual letters
+#' plot(wordsearch(words = wds, clues = clu, ltrs = flrs), title = "Random Greek Words")
+#'
 #' @return wordsearch object
 #' @export
 wordsearch <- function(words = c("finding", "needles", "inside", "haystacks"),
