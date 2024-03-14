@@ -7,6 +7,7 @@
 wordsearch(
   words = c("finding", "needles", "inside", "haystacks"),
   clues = words,
+  ltrs = LETTERS,
   r = 10,
   c = 10,
   image = NULL
@@ -16,6 +17,8 @@ wordsearch(
 \item{words}{a vector of hidden words (character/vector)}
 
 \item{clues}{a vector of word clues (optional; character/vector)}
+
+\item{ltrs}{a vector of custom filler letters (optional; character/vector)}
 
 \item{r}{number of rows}
 
@@ -53,5 +56,12 @@ math <- dplyr::tribble(
  )
  ex3 <- wordsearch(words = math$solution, clues = math$problem)
  plot(ex3, solution = TRUE, title = "Math is Fun")
+
+# Example 4 ----
+# using custom filler letters
+wds <- c("πάω", "πας", "πάει", "πάμε", "πάτε", "πάνε")
+clu <- c("I go", "you go", "she goes", "we go", "you all go", "they go")
+flrs <- unlist(strsplit(c(ΑΆΒΓΔΕΈΖΗΘΙΊΚΛΜΝΞΟΌΠΡΣΤΥΎΦΧΨΩΏΪ)) # split into vector individual letters
+plot(wordsearch(words = wds, clues = clu, ltrs = flrs), title = "Random Greek Words")
 
 }
