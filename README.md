@@ -15,10 +15,17 @@ downloads](http://cranlogs.r-pkg.org/badges/worrrd)](https://cran.r-project.org/
 
 Build word games using R. Ya hearrrd?
 
-Features:
+Original Features:
 
 -   Crossword Puzzle
 -   Wordsearch
+
+What this fork did to the existing package
+
+-   The only change is the new argument `ltrs` added to the function `wordsearch()`
+-   `ltrs` allows you to customize the filler letters
+-   in the absence of this argument, all standard English letters are used
+-   an example of how this might be useful is for a language other than English, such as the umlaut or Eszett in German or the accent marks in Spanish
 
 ## Installation
 
@@ -28,6 +35,9 @@ install.packages("worrrd")
 
 # Install development version from GitHub
 remotes::install_github("anthonypileggi/worrrd")
+
+# Install this fork's development version from Github
+remotes::install_github("fraupflaume/worrrd")
 ```
 
 ## Wordsearch
