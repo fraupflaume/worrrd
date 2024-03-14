@@ -16,7 +16,7 @@ wordsearch(
 \arguments{
 \item{words}{a vector of hidden words (character/vector)}
 
-\item{clues}{a vector of word clues (optional; character/vector)}
+\item{clues}{a vector of word clues, if set to `NA`, no word list will print with word search (optional; character/vector)}
 
 \item{ltrs}{a vector of custom filler letters (optional; character/vector)}
 
@@ -60,7 +60,7 @@ math <- dplyr::tribble(
 # Example 4 ----
 # using custom filler letters
 wds <- c("πάω", "πας", "πάει", "πάμε", "πάτε", "πάνε")
-clu <- c("I go", "you go", "she goes", "we go", "you all go", "they go")
+clu <- NA
 # split into vector of individual letters for custom filler
 flrs <- unlist(strsplit(c("ΑΆΒΓΔΕΈΖΗΘΙΊΚΛΜΝΞΟΌΠΡΣΤΥΎΦΧΨΩΏΪ"), split = ""))
 ex4 <- wordsearch(words = wds, clues = clu, ltrs = flrs)

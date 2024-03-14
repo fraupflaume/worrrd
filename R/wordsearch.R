@@ -1,6 +1,6 @@
 #' Create a wordsearch puzzle
 #' @param words a vector of hidden words (character/vector)
-#' @param clues a vector of word clues (optional; character/vector)
+#' @param clues a vector of word clues, if set to `NA`, no word list will print with word search (optional; character/vector)
 #' @param ltrs a vector of custom filler letters (optional; character/vector)
 #' @param r number of rows
 #' @param c number of columns
@@ -34,7 +34,7 @@
 #' # Example 4 ----
 #' # using custom filler letters
 #' wds <- c("πάω", "πας", "πάει", "πάμε", "πάτε", "πάνε")
-#' clu <- c("I go", "you go", "she goes", "we go", "you all go", "they go")
+#' clu <- NA
 #' # split into vector of individual letters for custom filler
 #' flrs <- unlist(strsplit(c("ΑΆΒΓΔΕΈΖΗΘΙΊΚΛΜΝΞΟΌΠΡΣΤΥΎΦΧΨΩΏΪ"), split = ""))
 #' ex4 <- wordsearch(words = wds, clues = clu, ltrs = flrs)
@@ -261,44 +261,46 @@ plot.wordsearch <- function(x,
   # TODO: add a background image
 
   # draw word list; merge with puzzle
-  if (clues) {
-    tmp <- dplyr::tibble(
-      i = 1,
-      j = 1:length(x$clues),
-      word = x$clues
-    )
-    g2 <- ggplot2::ggplot(tmp)
-    if (is.null(legend_size)) {
-      g2 <- g2 +
-        ggfittext::geom_fit_text(
-          aes(x = .data$i, y = .data$j, label = .data$word),
-          reflow = T,
-          grow = F,      # NOTE: grow=T slows this process...
-          min.size = 0
-        )
-    } else {
-      g2 <- g2 +
-        # geom_text(
-        #   aes(x = i, y = j, label = word),
-        #   size = legend_size,
-        #   hjust = 0.5
-        # )
-        ggtext::geom_richtext(
-          aes(x = .data$i, y = .data$j, label = .data$word),
-          fill = NA,
-          size = legend_size,
-          label.color = NA,  # remove background and outline
-          label.padding = grid::unit(rep(0, 4), "pt")  # remove padding
-        )
-    }
-    g2 <- g2 +
-      ggplot2::ggtitle(expression(underline("Word List"))) +
-      ggplot2::theme_void() +
-      ggplot2::scale_y_reverse() +
-      ggplot2::theme(
-        plot.title = element_text(hjust = 0.5, size = 16, face = "bold")
+  if (!is.na(clues)) {      # if clues = NA, don't draw word list
+    if (clues) {
+      tmp <- dplyr::tibble(
+        i = 1,
+        j = 1:length(x$clues),
+        word = x$clues
       )
-    g1 <- cowplot::plot_grid(g1, g2, nrow = 1, rel_widths = c(3/4, 1/4))
+      g2 <- ggplot2::ggplot(tmp)
+      if (is.null(legend_size)) {
+        g2 <- g2 +
+          ggfittext::geom_fit_text(
+            aes(x = .data$i, y = .data$j, label = .data$word),
+            reflow = T,
+            grow = F,      # NOTE: grow=T slows this process...
+            min.size = 0
+          )
+      } else {
+        g2 <- g2 +
+          # geom_text(
+          #   aes(x = i, y = j, label = word),
+          #   size = legend_size,
+          #   hjust = 0.5
+          # )
+          ggtext::geom_richtext(
+            aes(x = .data$i, y = .data$j, label = .data$word),
+            fill = NA,
+            size = legend_size,
+            label.color = NA,  # remove background and outline
+            label.padding = grid::unit(rep(0, 4), "pt")  # remove padding
+          )
+      }
+      g2 <- g2 +
+        ggplot2::ggtitle(expression(underline("Word List"))) +
+        ggplot2::theme_void() +
+        ggplot2::scale_y_reverse() +
+        ggplot2::theme(
+          plot.title = element_text(hjust = 0.5, size = 16, face = "bold")
+        )
+      g1 <- cowplot::plot_grid(g1, g2, nrow = 1, rel_widths = c(3/4, 1/4))
+    }
   }
 
   g1
